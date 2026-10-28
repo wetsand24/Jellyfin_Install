@@ -1,0 +1,12 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - ./config:/config
+      - ./cache:/cache
+      - /srv/media:/media:ro
+    devices:
+      - /dev/dri:/dev/dri   # Intel/AMD GPU for transcoding; delete these two lines if `ls /dev/dri` shows nothing
