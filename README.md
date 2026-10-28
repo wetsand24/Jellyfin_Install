@@ -11,6 +11,9 @@ Tested on Debian 13 with Jellyfin 12.4 and Docker 29.9.
 
 ## 1. Install Docker
 
+Run these as root. If your server blocks root logins over SSH, log in as your normal user, then `sudo -i`
+(or `su -` on Debian without sudo).
+
 ```bash
 apt update && apt upgrade -y
 apt install -y curl
@@ -27,19 +30,23 @@ docker --version
 └── Tears of Steel (2012)/Tears of Steel (2012).mov
 ```
 
-Messy names (`movie1.mov`, `sintel_final_v2.mkv`) get no poster or the wrong movie. In my test `movie1.mov`
-(really Tears of Steel) was matched to an unrelated 2018 film.
+Name each folder and file `Title (Year)` and Jellyfin finds the right poster and details for every movie.
 
-Free films to follow along with (Blender Foundation, CC BY):
+Make the folder and give it to your normal (non-root) user, so you can copy movies into it from your PC:
 
 ```bash
-mkdir -p /srv/media/movies && cd /srv/media/movies
-mkdir "Sintel (2010)" "Tears of Steel (2012)" "Elephants Dream (2006)"
-wget -O "Sintel (2010)/Sintel (2010).mkv" https://download.blender.org/durian/movies/Sintel.2010.1080p.mkv
-wget -O "Tears of Steel (2012)/Tears of Steel (2012).mov" https://download.blender.org/demo/movies/ToS/tears_of_steel_720p.mov
-wget -O "Elephants Dream (2006)/Elephants Dream (2006).mov" https://download.blender.org/ED/elephantsdream-1024-h264-st-aac.mov
-ls -R
+mkdir -p /srv/media/movies
+chown YOURUSER: /srv/media/movies     # your username, not "kadir"
+ls -ld /srv/media/movies
 ```
+
+Copy the movies over from your PC:
+
+- **Windows:** [WinSCP](https://winscp.net) (free): **Download Now** → the green download button → run the
+  installer with the default options. Then open it. New site: SFTP, host = your server's IP, your normal username and
+  password → Login → Accept the host key the first time. Right side: go to `/srv/media/movies`. Left side: select
+  your movie folders → **Upload** → OK.
+- **Mac:** [Cyberduck](https://cyberduck.io) (free), SFTP, same login.
 
 ## 3. Run Jellyfin
 
@@ -119,4 +126,4 @@ cd /opt/jellyfin && docker compose pull && docker compose up -d
 
 ---
 
-Films: *Sintel*, *Tears of Steel*, *Elephants Dream* © Blender Foundation, released under Creative Commons Attribution licences, [studio.blender.org/films](https://studio.blender.org/films/).
+Demo films in the video: *Sintel*, *Tears of Steel*, *Elephants Dream* © Blender Foundation, released under Creative Commons Attribution licences, [studio.blender.org/films](https://studio.blender.org/films/).
