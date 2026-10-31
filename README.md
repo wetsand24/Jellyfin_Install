@@ -3,7 +3,7 @@
 Your own Netflix for the movies you already have: Jellyfin on any Debian or Ubuntu machine, on your TV and phone,
 with Intel GPU transcoding, a kids profile, and watching away from home through Tailscale. Free, no account.
 
-Video: *Plex Wants $750. Here's the Free Replacement (Jellyfin Setup 2026)* on [@kadirrangwala](https://www.youtube.com/@kadirrangwala)
+▶️ Video: [Jellyfin Setup 2026: Free Plex Alternative (Docker + Remote Access)](https://youtu.be/hurqeeMF53U)
 
 Tested on Debian 13 with Jellyfin 12.4 and Docker 29.9.
 
